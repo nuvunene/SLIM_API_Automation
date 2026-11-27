@@ -1,0 +1,8 @@
+2026-11-27 10:36:45.887 [main] INFO  api.Test.UserTests - ---------------UserCreation----------------------------
+2026-11-27 10:36:49.663 [main] INFO  api.Test.UserTests - -----------UserCreated----------------
+2026-11-27 10:36:49.672 [main] INFO  api.Test.UserTests - ------------------getUser-------------------------
+2026-11-27 10:36:53.322 [main] INFO  api.Test.UserTests - --------------userFetched-----------------------
+2026-11-27 10:36:53.324 [main] INFO  api.Test.UserTests - ----------------UserUpdate----------------------
+2026-11-27 10:36:56.878 [main] INFO  api.Test.UserTests - ----------------UserUpdated----------------------
+2026-11-27 10:36:56.880 [main] INFO  api.Test.UserTests - ----------------DeleteUser----------------------
+2026-11-27 10:36:59.998 [main] INFO  api.Test.UserTests - ----------------UserDeleted----------------------

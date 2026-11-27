@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    
+    <!-- Define reusable properties for log file paths and formatting -->
+    <Properties>
+        <Property name="basePath">./Logs</Property>
+        <Property name="logPattern">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Property>
+    </Properties>
+
+    <Appenders>
+        <!-- 1. Console Appender: Displays logs in the IDE/CI terminal -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${logPattern}"/>
+        </Console>
+
+        <!-- 2. RollingFile Appender: Saves logs to a file and archives old runs -->
+        <RollingFile name="FileLogger" 
+                     fileName="${basePath}/automation-execution.log"
+                     filePattern="${basePath}/archive/automation-%d{yyyy-MM-dd}-%i.log.gz"
+                     append="false">
+            <PatternLayout pattern="${logPattern}"/>
+            <Policies>
+                <!-- Roll over when the file reaches 10MB or on a new day -->
+                <SizeBasedTriggeringPolicy size="10MB"/>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <!-- Keep up to 10 archived log files before deleting the oldest -->
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- Suppress verbose debug/info logs from common automation & HTTP libraries -->
+        <Logger name="org.openqa.selenium" level="WARN" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="FileLogger"/>
+        </Logger>
+        <Logger name="io.github.bonigarcia" level="WARN" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="FileLogger"/>
+        </Logger>
+        <Logger name="org.apache.http" level="WARN" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="FileLogger"/>
+        </Logger>
+        <Logger name="io.netty" level="WARN" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="FileLogger"/>
+        </Logger>
+
+        <!-- Custom Logger for your own Test Framework (Replace with your base package name) -->
+        <Logger name="NARC_LOAN_API_AUTOMATION" level="DEBUG" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="FileLogger"/>
+        </Logger>
+
+        <!-- Root Logger: Catches everything else at INFO level -->
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="FileLogger"/>
+        </Root>
+    </Loggers>
+
+</Configuration>
