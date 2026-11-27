@@ -23,8 +23,9 @@ public class ExtentReportManager implements ITestListener{
 	@Override
 	public void onStart(ITestContext context)
 	{
-		String timeStamp=new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-		repName="Test-Report-"+timeStamp+".html";
+		//String timeStamp=new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+		//repName="Test-Report-"+timeStamp+".html";
+		repName="Test-Report-"+".html";
 		sparkReporter=new ExtentSparkReporter(".\\Reports\\"+repName);
 		
 		sparkReporter.config().setDocumentTitle("NAC_LOAN_PROJECT");
